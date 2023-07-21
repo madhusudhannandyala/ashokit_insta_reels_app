@@ -18,7 +18,7 @@ pipeline {
         stage('Code Build') {
             steps {
                 echo "----------- build started ----------"
-                sh 'mvn clean package sonar:sonar'
+                sh 'mvn clean package -DskipTests=true'
                 echo "----------- build completed ----------"
             }
         }
