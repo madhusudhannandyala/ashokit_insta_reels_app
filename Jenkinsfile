@@ -34,9 +34,12 @@ pipeline {
             environment{
                 scannerHome = tool 'ashokit-sonarqube-scanner'
             }
-            withSonarQubeEnv('ashokit-sonarqube-server') {
-                sh "${scannerHome}/bin/sonar-scanner"
-            }
+			
+			steps{
+				withSonarQubeEnv('ashokit-sonarqube-server') {
+					sh "${scannerHome}/bin/sonar-scanner"
+				}
+			}
         }
     }
 }
