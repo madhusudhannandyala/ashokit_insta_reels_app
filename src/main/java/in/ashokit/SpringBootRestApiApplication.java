@@ -14,21 +14,35 @@ import org.springframework.web.bind.annotation.RestController;
 public class SpringBootRestApiApplication {
 
 	public static void main(String[] args) {
+		
+		int i = 10;
+		
+		int j = 20;
+		
+		
+		
 		SpringApplication.run(SpringBootRestApiApplication.class, args);
 	}
 
 	@GetMapping("/")
 	public String welcomeMsg() {
+		
+		int i = 10;
+		
+		int j = 20;
 		return "Welcome To Ashok IT..!!";
 	}
 	
 	private void m1 () {
+		
+		int i = 10;
+		
+		int j = 20;
 		String s = null;
 		int i = s.length();
 	}
 	
 	// comments
-	
 	
 
 }
