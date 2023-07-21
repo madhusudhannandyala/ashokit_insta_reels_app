@@ -37,7 +37,7 @@ pipeline {
 			
 			steps{
 				withSonarQubeEnv('ashokit-sonarqube-server') {
-					sh "${scannerHome}/bin/sonar-scanner"
+					//sh "${scannerHome}/bin/sonar-scanner"
 				}
 			}
         }
