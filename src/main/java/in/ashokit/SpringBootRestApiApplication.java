@@ -39,7 +39,7 @@ public class SpringBootRestApiApplication {
 		
 		int j = 20;
 		String s = null;
-		int i = s.length();
+		int k = s.length();
 	}
 	
 	// comments
