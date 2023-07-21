@@ -18,7 +18,7 @@ pipeline {
         stage('Code Build') {
             steps {
                 echo "----------- build started ----------"
-                sh 'mvn clean package -DskipTests=true'
+                sh 'mvn clean package sonar:sonar'
                 echo "----------- build completed ----------"
             }
         }
@@ -35,11 +35,11 @@ pipeline {
                 scannerHome = tool 'ashokit-sonarqube-scanner'
             }
 			
-			steps{
-				withSonarQubeEnv('ashokit-sonarqube-server') {
-					sh "${scannerHome}/bin/sonar-scanner"
-				}
-			}
+	    steps{
+		withSonarQubeEnv('ashokit-sonarqube-server') {
+		   sh "${scannerHome}/bin/sonar-scanner"
+		}
+	    }
         }
     }
 }
