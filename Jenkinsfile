@@ -12,7 +12,7 @@ pipeline {
     stages {
         stage('Clone Repo') {
             steps {
-                git branch: 'main', url: 'https://github.com/ravdy/tweet-trend.git'
+                git branch: 'main', url: 'https://github.com/ashokitschool/ashokit_insta_reels_app.git'
             }
         }
         stage('Code Build') {
