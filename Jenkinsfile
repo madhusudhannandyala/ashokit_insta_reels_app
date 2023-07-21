@@ -3,8 +3,7 @@ pipeline {
         node {
             label 'maven'
         }
-    }
-    
+    }    
     environment {
         PATH = "/opt/apache-maven-3.9.3/bin:$PATH"
     }
@@ -12,7 +11,7 @@ pipeline {
     stages {
         stage('Clone Repo') {
             steps {
-                git branch: 'main', url: 'https://github.com/ashokitschool/ashokit_insta_reels_app.git'
+                git branch: 'main', url: 'https://github.com/ravdy/tweet-trend.git'
             }
         }
         stage('Code Build') {
@@ -35,11 +34,24 @@ pipeline {
                 scannerHome = tool 'ashokit-sonarqube-scanner'
             }
 			
-	    steps{
-		withSonarQubeEnv('ashokit-sonarqube-server') {
-		   sh "${scannerHome}/bin/sonar-scanner"
-		}
-	    }
+			steps{
+				withSonarQubeEnv('ashokit-sonarqube-server') {
+					sh "${scannerHome}/bin/sonar-scanner"
+				}
+			}
         }
+		
+		stage("Quality Gate"){
+			steps {
+				script {
+					timeout(time: 1, unit: 'HOURS') { // Just in case something goes wrong, pipeline will be killed after a timeout
+						def qg = waitForQualityGate() // Reuse taskId previously collected by withSonarQubeEnv
+						if (qg.status != 'OK') {
+							error "Pipeline aborted due to quality gate failure: ${qg.status}"
+						}
+					}
+				}
+			}
+		}
     }
 }
